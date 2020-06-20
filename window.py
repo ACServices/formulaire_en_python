@@ -1,8 +1,8 @@
 #!/usr/bin/python3.7
-# -*-coding:UTF-8 -*-
+# -*-coding:UTF-8 -*-"
 
 import tkinter as tk
-
+from pickle import Pickler,Unpickler
 #root/main wiget
 root = tk.Tk()
 """====Centralize the root window====="""
@@ -15,7 +15,22 @@ positionY = (screenY // 2) - (rootY // 2)
 geo = "{}x{}+{}+{}".format(rootX,rootY,positionX,positionY)
 root.geometry(geo)
 """======================================"""
+def afficher(*args):
+    
+    print("nom:{}, prenom:{}, email:{}, age:{}, faculty:{}, pays:{}, sexe:{}".format(nomVar.get(),prenomVar.get(),emailVar.get(),ageVar.get(),facultyVar.get(),paysVar.get(),sexeVar.get()))
 
+def enregistrer(*args):
+    users = {}
+    users["nom"] = nomVar.get()
+    users["prenom"] = prenomVar.get()
+    users["email"] = emailVar.get()
+    users["age"] = ageVar.get()
+    users["faculty"] = facultyVar.get()
+    users["pays"] = paysVar.get()
+    users["sexe"] = sexeVar.get()
+    with open("users","wb") as userFile:
+         userFilePickler = Pickler(userFile)
+         userFilePickler.dump(users)
 """===========THE MENU==================="""
 #menu bar
 menuBar = tk.Menu(root)
@@ -24,7 +39,7 @@ menuBar = tk.Menu(root)
 fileMenu = tk.Menu(menuBar,tearoff=0)
 fileMenu.add_command(label="New")
 fileMenu.add_command(label="Open")
-fileMenu.add_command(label="Quit")
+fileMenu.add_command(label="Quit",command=root.quit)
 
 helpMenu = tk.Menu(menuBar,tearoff=0)
 helpMenu.add_command(label="contact")
@@ -34,12 +49,13 @@ menuBar.add_cascade(label="File",menu=fileMenu)
 menuBar.add_cascade(label="Help",menu=helpMenu)
 
 """===========FORMS WIDGETS================"""
+#tkinter variables associate width the widget
 nomVar = tk.StringVar()
 prenomVar = tk.StringVar()
 emailVar = tk.StringVar()
-facultyVar = tk.StringVar()
+facultyVar = tk.IntVar()
 ageVar = tk.StringVar()
-paysVar = tk.StringVar()
+paysVar = tk.IntVar()
 sexeVar = tk.StringVar()
 
 nameLabel = tk.Label(root,text="Nom: ")
@@ -86,16 +102,11 @@ femme = tk.Radiobutton(root,text="femme",variable=sexeVar,value="femme")
 homme.grid(row=3,column=1,sticky="w")
 femme.grid(row=3,column=1,sticky="e")
 
-btn_envoyer = tk.Button(root,text="ENVOYER")
+btn_envoyer = tk.Button(root,text="ENVOYER",command=enregistrer)
 btn_envoyer.grid(row=5,column=1,columnspan=3,ipadx=75,pady=10)
 
-
-
-
-
-
-
-
 #root laucher
+root["bg"] = "purple"
+root.title("formulaire")
 root.config(menu=menuBar)
 root.mainloop()
