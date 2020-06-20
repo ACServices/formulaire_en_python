@@ -1,10 +1,11 @@
 #!/usr/bin/python3.7
 # -*-coding:UTF-8 -*-"
-
 import tkinter as tk
-from pickle import Pickler,Unpickler
+
 #root/main wiget
 root = tk.Tk()
+from fonctions import *
+
 """====Centralize the root window====="""
 screenX = int(root.winfo_screenwidth())
 screenY = int(root.winfo_screenheight())
@@ -15,22 +16,6 @@ positionY = (screenY // 2) - (rootY // 2)
 geo = "{}x{}+{}+{}".format(rootX,rootY,positionX,positionY)
 root.geometry(geo)
 """======================================"""
-def afficher(*args):
-    
-    print("nom:{}, prenom:{}, email:{}, age:{}, faculty:{}, pays:{}, sexe:{}".format(nomVar.get(),prenomVar.get(),emailVar.get(),ageVar.get(),facultyVar.get(),paysVar.get(),sexeVar.get()))
-
-def enregistrer(*args):
-    users = {}
-    users["nom"] = nomVar.get()
-    users["prenom"] = prenomVar.get()
-    users["email"] = emailVar.get()
-    users["age"] = ageVar.get()
-    users["faculty"] = facultyVar.get()
-    users["pays"] = paysVar.get()
-    users["sexe"] = sexeVar.get()
-    with open("users","wb") as userFile:
-         userFilePickler = Pickler(userFile)
-         userFilePickler.dump(users)
 """===========THE MENU==================="""
 #menu bar
 menuBar = tk.Menu(root)
@@ -49,15 +34,6 @@ menuBar.add_cascade(label="File",menu=fileMenu)
 menuBar.add_cascade(label="Help",menu=helpMenu)
 
 """===========FORMS WIDGETS================"""
-#tkinter variables associate width the widget
-nomVar = tk.StringVar()
-prenomVar = tk.StringVar()
-emailVar = tk.StringVar()
-facultyVar = tk.IntVar()
-ageVar = tk.StringVar()
-paysVar = tk.IntVar()
-sexeVar = tk.StringVar()
-
 nameLabel = tk.Label(root,text="Nom: ")
 nameLabel.grid(row=0,column=0)
 nameField = tk.Entry(root,textvariable=nomVar)
@@ -102,7 +78,7 @@ femme = tk.Radiobutton(root,text="femme",variable=sexeVar,value="femme")
 homme.grid(row=3,column=1,sticky="w")
 femme.grid(row=3,column=1,sticky="e")
 
-btn_envoyer = tk.Button(root,text="ENVOYER",command=enregistrer)
+btn_envoyer = tk.Button(root,text="ENVOYER",command=afficher)
 btn_envoyer.grid(row=5,column=1,columnspan=3,ipadx=75,pady=10)
 
 #root laucher
