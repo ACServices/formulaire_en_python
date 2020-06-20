@@ -9,7 +9,7 @@ from fonctions import *
 """====Centralize the root window====="""
 screenX = int(root.winfo_screenwidth())
 screenY = int(root.winfo_screenheight())
-rootX = 480 
+rootX = 490 
 rootY = 180
 positionX = (screenX // 2)-(rootX // 2)
 positionY = (screenY // 2) - (rootY // 2)
@@ -37,22 +37,22 @@ menuBar.add_cascade(label="Help",menu=helpMenu)
 nameLabel = tk.Label(root,text="Nom: ")
 nameLabel.grid(row=0,column=0)
 nameField = tk.Entry(root,textvariable=nomVar)
-nameField.grid(row=0,column=1)
+nameField.grid(row=0,column=1,padx=5)
 
 prenomLabel = tk.Label(root,text="Prenom: ")
 prenomLabel.grid(row=1,column=0)
 prenomField = tk.Entry(root,textvariable=prenomVar)
-prenomField.grid(row=1,column=1)
+prenomField.grid(row=1,column=1,padx=5)
 
 emailLabel = tk.Label(root,text="Email: ")
 emailLabel.grid(row=0,column=2)
 emailField = tk.Entry(root,textvariable=emailVar)
-emailField.grid(row=0,column=3)
+emailField.grid(row=0,column=3,padx=5)
 
 ageLabel = tk.Label(root,text="Age: ")
 ageLabel.grid(row=2,column=0)
 ageField = tk.Spinbox(root,from_=18,to=85,textvariable=ageVar,width=18)
-ageField.grid(row=2,column=1)
+ageField.grid(row=2,column=1,padx=5)
 
 facultyLabel = tk.Label(root,text="Faculty: ")
 facultyLabel.grid(row=1,column=2)
@@ -60,11 +60,10 @@ facultyField = tk.Listbox(root,height=2)
 facultyField.insert(0,"Informatique")
 facultyField.insert(1,"Medecine")
 facultyField.insert(2,"Droit")
-
-facultyField.grid(row=1,column=3)
+facultyField.grid(row=1,column=3,padx=5)
 
 paysLabel = tk.Label(root,text="Pays: ")
-paysLabel.grid(row=2,column=2)
+paysLabel.grid(row=2,column=2,padx=5)
 paysField = tk.Listbox(root,height=2)
 paysField.insert(0,"Burkina")
 paysField.insert(1,"Mali")
